@@ -1,0 +1,2 @@
+#/usr/bin/env sh
+patch -p2 < 0001-demo-how-to-move-some-function-to-common-static-libr.patch
