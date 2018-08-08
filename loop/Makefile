@@ -1,5 +1,4 @@
-CC = gcc
-#CC = clang
+CC ?= gcc
 
 SRC = loop1.c loop2.c loop3.c yes.c
 
