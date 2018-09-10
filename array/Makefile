@@ -1,8 +1,6 @@
 CC	?= gcc
 
-#SRC	= 01-basic.c 02-novalue.c 03-sizeof.c 04-arrayio.c 05-compare.c 05-2-iocompare.c
-
-OBJ	= 01-basic 02-novalue 03-sizeof 04-arrayio 05-compare 05-2-iocompare
+OBJ	= 01-basic 02-novalue 03-sizeof 04-arrayio 05-compare 05-2-iocompare 06-inputseveral
 
 all: $(OBJ)
 
