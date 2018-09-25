@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
     if(result_num > result_denom)
     {
         max = result_num;
-        min = result_denom;	
+        min = result_denom;
     }
     else
     {
@@ -48,9 +48,9 @@ int main(int argc, char *argv[])
             if(max%i==0)
             {
                 com = i;
-		break;
-	    }
-        }	
+                break;
+            }
+        }
     }
 
     sim_result_num = result_num / com;
