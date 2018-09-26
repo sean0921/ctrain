@@ -5,7 +5,7 @@
 
 int main(int argc, char *argv[])
 {
-    if (argc < 5) 
+    if (argc != 5)
     {
         printf("\x1b[1;31mPlease input at lease 4 interger as arguments. :)\x1b[0m\n");
         return 0;

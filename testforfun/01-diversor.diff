@@ -7,7 +7,7 @@ index 1ea6f48..387f71f 100644
  int main(int argc, char *argv[])
  {
 -  int num1, denom1, num2, denom2, result_num, result_denom;
-+    if (argc < 5) 
++    if (argc != 5)
 +    {
 +        printf("\x1b[1;31mPlease input at lease 4 interger as arguments. :)\x1b[0m\n");
 +        return 0;
