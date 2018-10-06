@@ -30,7 +30,7 @@ while(1)
     for(i=0;i<nop;i++)
     {
         scanf("%d",&arr[i]);
-    }	
+    }
 
     for(i=0;i<nop;i++)
     {
@@ -40,7 +40,7 @@ while(1)
             {
                 legal=1;
 #ifdef DEBUG
-	        printf("legal: %d\n",legal);
+                printf("legal: %d\n",legal);
 #endif
             }
             else
@@ -52,14 +52,14 @@ while(1)
                 break;
             }
         }
-	else
-	{
+        else
+        {
             legal=0;
 #ifdef DEBUG
-	    printf("legal: %d\n",legal);
+            printf("legal: %d\n",legal);
 #endif
             break;
-	}
+        }
     }
 
 #ifdef DEBUG
@@ -75,7 +75,6 @@ while(1)
         printf("The answer is illegal, please reset the answer.\n");
         fflush(stdin);
     }
-	
 }
 
 #ifdef DEBUG
@@ -93,7 +92,7 @@ while(1)
     for(i=0;i<nop;i++)
     {
         scanf("%d",&gus[i]);
-    }	
+    }
 
     for(i=0;i<nop;i++)
     {
@@ -103,7 +102,7 @@ while(1)
             {
                 legal=1;
 #ifdef DEBUG
-	        printf("legal: %d\n",legal);
+                printf("legal: %d\n",legal);
 #endif
             }
             else
@@ -115,14 +114,14 @@ while(1)
                 break;
             }
         }
-	else
-	{
+        else
+        {
             legal=0;
 #ifdef DEBUG
-	    printf("legal: %d\n",legal);
+            printf("legal: %d\n",legal);
 #endif
             break;
-	}
+        }
     }
 
 #ifdef DEBUG
@@ -143,14 +142,14 @@ while(1)
         {
             h++;
         }
-	else
-	{
+        else
+        {
             x++;
-	}
+        }
     }
     printf("%dH %dX \n",h,x);
     if(h==nop)
-    {	    
+    { 
         break;
     }
 }
