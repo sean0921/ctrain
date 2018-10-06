@@ -6,6 +6,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 //#define DEBUG  //temporary use printf() function to detect the value
 
@@ -150,11 +151,15 @@ while(1)
         }
         else
         {
-	    for(j=0;j<nop;j++)
+            for(j=0;j<nop;j++)
             {
-                if(gus[i]==arr[j])
+                if(gus[i]==arr[j] && gus[i]!=gus[j] && i<j )
                 {
                     x++;
+#ifdef DEBUG
+                    printf("gus[i]=%d, arr[j]=%d, gus[j]=%d, i=%d, j=%d, x=%d\n",gus[i],arr[j],gus[j],i,j,x);
+#endif
+                    break;
                 }
             }
         }
