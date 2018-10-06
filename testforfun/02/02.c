@@ -140,6 +140,7 @@ while(1)
     }
 
     int h=0, x=0;
+    int j;
 
     for(i=0;i<nop;i++)
     {
@@ -149,7 +150,13 @@ while(1)
         }
         else
         {
-            x++;
+	    for(j=0;j<nop;j++)
+            {
+                if(gus[i]==arr[j])
+                {
+                    x++;
+                }
+            }
         }
     }
     printf("%dH %dX \n",h,x);
