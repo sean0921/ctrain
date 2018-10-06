@@ -41,7 +41,7 @@ while(1)
             if(arr[i]<=maxi)
             {
                 legal=1;
-#ifdef DEGUG
+#ifdef DEBUG
 	        printf("legal: %d\n",legal);
 #endif
             }
@@ -104,7 +104,7 @@ while(1)
             if(gus[i]<=maxi)
             {
                 legal=1;
-#ifdef DEGUG
+#ifdef DEBUG
 	        printf("legal: %d\n",legal);
 #endif
             }
