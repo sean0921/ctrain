@@ -1,4 +1,8 @@
-/* Adds two fractions */
+//
+// test case:
+//
+// python3 -c 'print ("3 "*100000 + "\n" + "3 "*100000)'|./a.out 3 100000
+//
 
 #include <stdio.h>
 #include <stdlib.h>
