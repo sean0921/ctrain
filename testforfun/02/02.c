@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+//#define DEBUG  //temporary use printf() function to detect the value
+
 int main(int argc, char *argv[])
 {
     if (argc != 3)
@@ -11,15 +13,150 @@ int main(int argc, char *argv[])
         return 0;
     }
 
-    int noi, nop;
+    int maxi, nop, legal=0; //max interger, number of position, if it is legal (1: true, 0: false)
 
 /* replace scanf ways by using argv and "a to i" ways */
 //  printf("Enter first fraction: ");
 //  scanf("%d/%d", &num1, &denom1);
-    noi = atoi(argv[1]);
+    maxi = atoi(argv[1]);
     nop = atoi(argv[2]);
 
-    printf("You Set N = %d , P = %d \n", noi, nop);
+    printf("You Set N = %d , P = %d \n", maxi, nop);
+
+    int arr[nop-1];
+    int i;
+
+while(1)
+{
+    printf("ans: ");
+    for(i=0;i<nop;i++)
+    {
+        scanf("%d",&arr[i]);
+    }	
+
+    for(i=0;i<nop;i++)
+    {
+        if(arr[i]>0)
+        {
+            if(arr[i]<=maxi)
+            {
+                legal=1;
+#ifdef DEGUG
+	        printf("legal: %d\n",legal);
+#endif
+            }
+            else
+            {
+                legal=0;
+#ifdef DEBUG
+                printf("legal: %d\n",legal);
+#endif
+                break;
+            }
+        }
+	else
+	{
+            legal=0;
+#ifdef DEBUG
+	    printf("legal: %d\n",legal);
+#endif
+            break;
+	}
+    }
+
+#ifdef DEBUG
+    printf("so legel: %d\n",legal);
+#endif
+
+    if(legal==1)
+    {
+        break;
+    }
+    else
+    {
+        printf("The answer is illegal, please reset the answer.\n");
+        fflush(stdin);
+    }
+	
+}
+
+#ifdef DEBUG
+    printf("array: ");
+    for(i=0;i<nop;i++)
+        printf("%d ",arr[i]);
+    printf("\n");
+#endif
+
+int gus[nop-1];
+
+while(1)
+{
+    printf("guess: ");
+    for(i=0;i<nop;i++)
+    {
+        scanf("%d",&gus[i]);
+    }	
+
+    for(i=0;i<nop;i++)
+    {
+        if(gus[i]>0)
+        {
+            if(gus[i]<=maxi)
+            {
+                legal=1;
+#ifdef DEGUG
+	        printf("legal: %d\n",legal);
+#endif
+            }
+            else
+            {
+                legal=0;
+#ifdef DEBUG
+                printf("legal: %d\n",legal);
+#endif
+                break;
+            }
+        }
+	else
+	{
+            legal=0;
+#ifdef DEBUG
+	    printf("legal: %d\n",legal);
+#endif
+            break;
+	}
+    }
+
+#ifdef DEBUG
+    printf("so legel: %d\n",legal);
+#endif
+
+    if(legal==0)
+    {
+        printf("The answer is illegal, please reset the answer.\n");
+        continue;
+    }
+
+    int h=0, x=0;
+
+    for(i=0;i<nop;i++)
+    {
+        if(gus[i]==arr[i])
+        {
+            h++;
+        }
+	else
+	{
+            x++;
+	}
+    }
+    printf("%dH %dX \n",h,x);
+    if(h==nop)
+    {	    
+        break;
+    }
+}
+
     return 0;
 }
 
