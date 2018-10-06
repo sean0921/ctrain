@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
 
     printf("You Set N = %d , P = %d \n", maxi, nop);
 
-    int arr[nop-1];
+    int arr[nop];
     int i;
 
 while(1)
@@ -88,7 +88,7 @@ while(1)
     printf("\n");
 #endif
 
-int gus[nop-1];
+int gus[nop];
 legal=0; //reset legal value for prepare checking next array
 
 while(1)
