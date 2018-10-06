@@ -85,6 +85,7 @@ while(1)
 #endif
 
 int gus[nop-1];
+legal=0; //reset legal value for prepare checking next array
 
 while(1)
 {
