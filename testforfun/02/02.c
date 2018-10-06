@@ -15,9 +15,7 @@ int main(int argc, char *argv[])
 
     int maxi, nop, legal=0; //max interger, number of position, if it is legal (1: true, 0: false)
 
-/* replace scanf ways by using argv and "a to i" ways */
-//  printf("Enter first fraction: ");
-//  scanf("%d/%d", &num1, &denom1);
+/* using argc argv and "a to i" ways */
     maxi = atoi(argv[1]);
     nop = atoi(argv[2]);
 
