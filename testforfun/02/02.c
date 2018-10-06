@@ -82,7 +82,7 @@ while(1)
 }
 
 #ifdef DEBUG
-    printf("array: ");
+    printf("ok! ans: ");
     for(i=0;i<nop;i++)
         printf("%d ",arr[i]);
     printf("\n");
@@ -153,6 +153,13 @@ while(1)
         }
     }
     printf("%dH %dX \n",h,x);
+#ifdef DEBUG
+    printf("well, ans: ");
+    for(i=0;i<nop;i++)
+        printf("%d ",arr[i]);
+    printf("\n");
+#endif
+
     if(h==nop)
     { 
         break;
