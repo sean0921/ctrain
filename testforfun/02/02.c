@@ -140,7 +140,7 @@ while(1)
         continue;
     }
 
-    int h=0, x=0;
+    int h=0, x=0, ish[nop], isx[nop];
     int j;
 
     for(i=0;i<nop;i++)
@@ -148,22 +148,31 @@ while(1)
         if(gus[i]==arr[i])
         {
             h++;
+            ish[i]=1;
+            isx[i]=0;
         }
         else
         {
-            for(j=0;j<nop;j++)
-            {
-                if(gus[i]==arr[j] && gus[i]!=gus[j] && i<j )
-                {
-                    x++;
+            ish[i]=0;
+            isx[i]=0;
+        }
+    }
+
+    for(i=0;i<nop;i++)
+    {
+        for(j=0;j<nop;j++)
+        {
 #ifdef DEBUG
-                    printf("gus[i]=%d, arr[j]=%d, gus[j]=%d, i=%d, j=%d, x=%d\n",gus[i],arr[j],gus[j],i,j,x);
+            printf("gus[%d]=%d, arr[%d]=%d, ish[%d]=%d, isx[%d]=%d.\n",i, gus[i], j, arr[j], i, ish[i], i, isx[i]);
 #endif
-                    break;
-                }
+            if(gus[i]==arr[j] && ish[i]==0 && isx[i]==0 && ish[j]==0 && isx[j]==0 )
+            {
+                x++;
+                isx[j]=1;
             }
         }
     }
+
     printf("%dH %dX \n",h,x);
 #ifdef DEBUG
     printf("well, ans: ");
