@@ -6,9 +6,12 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
 
 //#define DEBUG  //temporary use printf() function to detect the value
+
+#ifdef DEBUG
+#include <unistd.h>  //for sleep() function
+#endif
 
 int main(int argc, char *argv[])
 {
@@ -46,6 +49,7 @@ while(1)
                 legal=1;
 #ifdef DEBUG
                 printf("legal: %d\n",legal);
+                sleep(1);
 #endif
             }
             else
@@ -53,6 +57,7 @@ while(1)
                 legal=0;
 #ifdef DEBUG
                 printf("legal: %d\n",legal);
+                sleep(1);
 #endif
                 break;
             }
@@ -62,6 +67,7 @@ while(1)
             legal=0;
 #ifdef DEBUG
             printf("legal: %d\n",legal);
+            sleep(1);
 #endif
             break;
         }
@@ -69,6 +75,7 @@ while(1)
 
 #ifdef DEBUG
     printf("so legel: %d\n",legal);
+    sleep(1);
 #endif
 
     if(legal==1)
@@ -86,6 +93,7 @@ while(1)
     printf("ok! ans: ");
     for(i=0;i<nop;i++)
         printf("%d ",arr[i]);
+        sleep(1);
     printf("\n");
 #endif
 
@@ -109,6 +117,7 @@ while(1)
                 legal=1;
 #ifdef DEBUG
                 printf("legal: %d\n",legal);
+                sleep(1);
 #endif
             }
             else
@@ -116,6 +125,7 @@ while(1)
                 legal=0;
 #ifdef DEBUG
                 printf("legal: %d\n",legal);
+                sleep(1);
 #endif
                 break;
             }
@@ -125,6 +135,7 @@ while(1)
             legal=0;
 #ifdef DEBUG
             printf("legal: %d\n",legal);
+            sleep(1);
 #endif
             break;
         }
@@ -163,7 +174,8 @@ while(1)
         for(j=0;j<nop;j++)
         {
 #ifdef DEBUG
-            printf("gus[%d]=%d, arr[%d]=%d, ish[%d]=%d, isx[%d]=%d.\n",i, gus[i], j, arr[j], i, ish[i], i, isx[i]);
+            printf("gus[%d]=%d, arr[%d]=%d, ish[%d]=%d, isx[%d]=%d.\n",i, gus[i], j, arr[j], j, ish[j], j, isx[j]);
+            sleep(1);
 #endif
             if(gus[i]==arr[j] && ish[i]==0 && isx[i]==0 && ish[j]==0 && isx[j]==0 )
             {
@@ -178,6 +190,7 @@ while(1)
     printf("well, ans: ");
     for(i=0;i<nop;i++)
         printf("%d ",arr[i]);
+        sleep(1);
     printf("\n");
 #endif
 
