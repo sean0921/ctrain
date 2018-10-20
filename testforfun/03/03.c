@@ -21,8 +21,8 @@ int main(int argc, char *argv[]) {
                 printf("%c",argv[2][i]);
                 thtw[i]=argv[2][i]-'0';
             }
-*/
             printf("\n");
+*/
             printf("interger: ");
 
             for(i=0;i<32;i++) {
