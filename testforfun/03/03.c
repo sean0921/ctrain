@@ -14,8 +14,8 @@ int main(int argc, char *argv[]) {
     int i,j;
     int thtw[32];
     int sxfr[64];
-    int exp_orig = -127;
-    float exp = 1;
+    int exponent_orig = -127;
+    float exponent = 1;
     int mantisa_orig[23];
     float mantisa_orig_flt[23];
     float mantisa_flt;
@@ -29,7 +29,6 @@ int main(int argc, char *argv[]) {
 
     switch( trans_mode ) {
         case 1:
-
             /* calculate decimal integer first */
             for(i=0;i<32;i++) {
                 thtw[i]=argv[2][i]-'0';
@@ -38,27 +37,30 @@ int main(int argc, char *argv[]) {
             printf("interger: %d\n", result_int);
 
             /* calculate float */
+            /* calculate exponent part */
 #ifdef DEBUG
-            printf("\x1b[1;31mexp part: \x1b[m");
+            printf("\x1b[1;31mexponent part: \x1b[m");
 #endif
             for(i=0;i<8;i++) {
-                exp_orig +=  thtw[i+1] << (7-i);
+                exponent_orig +=  (thtw[i+1] << (7-i));
 #ifdef DEBUG
-                printf("\x1b[1;31m%d\x1b[m",thtw[i]);
+                printf("\x1b[1;31m%d\x1b[m",thtw[i+1]);
 #endif
             }
 #ifdef DEBUG
             printf("\n");
-            printf("\x1b[1;31mexp_orig: %d \x1b[m\n",exp_orig);
+            printf("\x1b[1;31mexponent_orig: %d \x1b[m\n",exponent_orig);
 #endif
-            if(exp_orig<0) {
-                exp = 1 << ( 0 - exp_orig );
-                exp = 1 / (float) exp;
+
+            if(exponent_orig<0) {
+                exponent = 1 << ( 0 - exponent_orig );
+                exponent = 1 / ( (float) exponent );
             } else {
-                exp = (float) (1 << exp_orig);
+                exponent = (float) (1 << exponent_orig);
             }
+
 #ifdef DEBUG
-            printf("\x1b[1;31mexp: %f \n\x1b[m",exp);
+            printf("\x1b[1;31mexponent: %f \n\x1b[m",exponent);
 #endif
 
             for(i=0;i<23;i++) {
@@ -84,7 +86,7 @@ int main(int argc, char *argv[]) {
                 sign = 1;
             }
 
-            result_flt = mantisa_flt * exp * sign;
+            result_flt = ( 1.000 + mantisa_flt ) * exponent * sign;
             printf("float: %f \n", result_flt);
 
             break;
