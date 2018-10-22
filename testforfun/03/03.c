@@ -21,7 +21,8 @@ int main(int argc, char *argv[]) {
     float mantisa_flt;
     int result_int = 0;
     float result_flt;
-    int32_t input_int;
+    int32_t input_int32;
+    int64_t input_int64;
     int result_thtw[32];
     int result_sxfr[64];
     
@@ -92,7 +93,17 @@ int main(int argc, char *argv[]) {
             break;
 
         case 2:
-            printf("case 2\n");
+            input_int32 = atoi(argv[2]);
+            printf("32-bit: ");
+            for(i=0;i<32;i++) {
+                j = input_int32 >> (31-i);
+                if(j & 1) {
+                    printf("1");
+                } else {
+                    printf("0");
+                }
+            }
+            printf("\n");
             break;
         case 3:
             printf("case 3\n");
@@ -110,7 +121,17 @@ int main(int argc, char *argv[]) {
             printf("\n");
             break;
         case 5:
-            printf("case 5\n");
+            input_int64 = atoi(argv[2]);
+            printf("64-bit: ");
+            for(i=0;i<63;i++) {
+                j = input_int64 >> (63-i);
+                if(j & 1) {
+                    printf("1");
+                } else {
+                    printf("0");
+                }
+            }
+            printf("\n");
             break;
         case 6:
             printf("case 6\n");
