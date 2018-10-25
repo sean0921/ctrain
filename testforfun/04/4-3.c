@@ -2,14 +2,21 @@
 #include <stdlib.h> // atoi(),
 #include <unistd.h> // sleep(),
 
-//#define DEBUG
+#define ANSI_RED    "\x1b[1;31m"
+#define ANSI_RESET  "\x1b[0m"
 
-int main(int argc, char *argv[]) {
-    if (argc != 3) {
-        printf("Please input at least 2 interger as arguments. :)\x1b[0m\n");
+// usage: int check_argument(<number>)
+// use it to specific
+int check_arguments(int argnum, int num) {
+    if (argnum != (num+1) ) {
+        printf( ANSI_RED "Please input at least %d interger as arguments. :)" ANSI_RESET "\n",num);
+        return -1;
+    } else {
         return 0;
     }
+}
 
+int main(int argc, char *argv[]) {
     int trans_mode; // mode, M=1~6
     int i,j;
     int thtw[32];
@@ -30,6 +37,10 @@ int main(int argc, char *argv[]) {
     int result_thtw[32];
     int result_sxfr[64];
     
+    if(check_arguments(argc,2)!=0) {
+        return -1;
+    }
+
     trans_mode = atoi(argv[1]);
 
     switch( trans_mode ) {

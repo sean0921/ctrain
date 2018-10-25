@@ -6,31 +6,38 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-
-//#define DEBUG  //temporary use printf() function to detect the value
-
-#ifdef DEBUG
 #include <unistd.h>  //for sleep() function
-#endif
+
+#define ANSI_RED    "\x1b[1;31m"
+#define ANSI_RESET  "\x1b[0m"
+
+// usage: int check_argument(<number>)
+// use it to specific
+int check_arguments(int argnum, int num) {
+    if (argnum != (num+1) ) {
+        printf( ANSI_RED "Please input at least %d interger as arguments. :)" ANSI_RESET "\n",num);
+        return -1;
+    } else {
+        return 0;
+    }
+}
 
 int main(int argc, char *argv[])
 {
-    if (argc != 3)
-    {
-        printf("\x1b[1;31mPlease input at least 2 interger as arguments. :)\x1b[0m\n");
-        return 0;
+
+    if( check_arguments(argc,2) != 0) {
+        return -1;
     }
 
     int maxi, nop, legal=0; //max interger, number of position, if it is legal (1: true, 0: false)
+    int arr[nop];
+    int i;
 
 /* using argc argv and "a to i" ways */
     maxi = atoi(argv[1]);
     nop = atoi(argv[2]);
 
     printf("You Set N = %d , P = %d \n", maxi, nop);
-
-    int arr[nop];
-    int i;
 
 while(1)
 {
