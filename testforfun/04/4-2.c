@@ -1,9 +1,3 @@
-//
-// test case:
-//
-// python3 -c 'print ("3 "*100000 + "\n" + "3 "*100000)'|./a.out 3 100000
-//
-
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -23,21 +17,19 @@ int check_arguments(int argnum, int num) {
     }
 }
 
-int check_legal(int array[], int array_number, int max_integer, int legal_label) 
-{
+int check_legal(int array[], int array_number, int max_integer, int* legal_label) {
     for(i=0;i<array_number;i++) {
         if(array[i]>0) {
-            if(array[i] <= max_integer) legal_label=1; 
+            if(array[i] <= max_integer) *legal_label=1;
             else {
-                legal_label=0;
+                *legal_label=0;
                 break;
             }
         } else {
-            legal_label=0;
+            *legal_label=0;
             break;
         }
     }
-    return legal_label;
 }
 
 #if 0
@@ -65,7 +57,6 @@ int main(int argc, char *argv[])
         return -1;
     }
 
-/* using argc argv and "a to i" ways */
     maxi = atoi(argv[1]);
     nop = atoi(argv[2]);
 
@@ -78,7 +69,7 @@ int main(int argc, char *argv[])
             scanf("%d",&arr[i]);
         }
     
-        legal = check_legal(arr,nop,maxi,legal);
+        check_legal(arr,nop,maxi,&legal);
     
         if(legal==1) {
             break;
@@ -97,26 +88,18 @@ int main(int argc, char *argv[])
             scanf("%d",&gus[i]);
         }
     
-        legal = check_legal(gus,nop,maxi,legal);
+        check_legal(gus,nop,maxi,&legal);
     
         if(legal==0) {
             printf("The answer is illegal, please reset the answer.\n");
             continue;
         }
     
-        int h=0, x=0, ish[nop], isx[nop];
+        int h=0, x=0;
+        int ish[nop], isx[nop];
         int j;
     
 //        compare_match(int array1[], int array2[], int array_position) {
-
-#if 0
-            int b;
-            int a[10];
-            a[0];
-            *(a+0);
-            a[1];
-            (a+1)=&b;
-#endif
 
 //        h = compare_match_value(arr,gus,&ish,&isx,nop);
         for(i=0;i<nop;i++) {
@@ -129,7 +112,7 @@ int main(int argc, char *argv[])
                 isx[i]=0;
             }
         }
-    
+
 //        x = compare_nomatch_value(arr,gus,&ish,&isx,nop);
         for(i=0;i<nop;i++) {
             for(j=0;j<nop;j++) {
