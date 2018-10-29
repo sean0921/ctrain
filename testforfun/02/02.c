@@ -1,16 +1,17 @@
-//
-// test case:
-//
-// python3 -c 'print ("3 "*100000 + "\n" + "3 "*100000)'|./a.out 3 100000
-//
+/*******************************************************************************
+* encoding: UTF-8
+* 編譯方式：gcc -o hw2 hw2.c
+* 執行方式：./hw2
+* 程式功能：猜數字遊戲
+********************************************************************************/
 
 #include <stdio.h>
 #include <stdlib.h>
 
-//#define DEBUG  //temporary use printf() function to detect the value
+//#define DEBUG  /* 定義除錯模式 */
 
 #ifdef DEBUG
-#include <unistd.h>  //for sleep() function
+#include <unistd.h>  /* 除錯模式中 sleep() 函數會用到 */
 #endif
 
 int main(int argc, char *argv[])
@@ -21,9 +22,9 @@ int main(int argc, char *argv[])
         return 0;
     }
 
-    int maxi, nop, legal=0; //max interger, number of position, if it is legal (1: true, 0: false)
+    int maxi, nop, legal=0; /* 最大整數, 可填入整數的空位, 數值是否合法 */
 
-/* using argc argv and "a to i" ways */
+/* 將參數字串轉換成整數形態 */
     maxi = atoi(argv[1]);
     nop = atoi(argv[2]);
 
@@ -32,6 +33,7 @@ int main(int argc, char *argv[])
     int arr[nop];
     int i;
 
+/* 製作迴圈, 條件成立後才可離開 */
 while(1)
 {
     printf("ans: ");
@@ -85,7 +87,6 @@ while(1)
     else
     {
         printf("The answer is illegal, please reset the answer.\n");
-        fflush(stdin);
     }
 }
 
@@ -98,7 +99,7 @@ while(1)
 #endif
 
 int gus[nop];
-legal=0; //reset legal value for prepare checking next array
+legal=0; /* 重新假設答案都不合法, 直到確定合法 */
 
 while(1)
 {
@@ -154,17 +155,18 @@ while(1)
     int h=0, x=0, ish[nop], isx[nop];
     int j;
 
+/* 先判斷同位置數值是否一樣, 即完全猜對 */
     for(i=0;i<nop;i++)
     {
         if(gus[i]==arr[i])
         {
             h++;
-            ish[i]=1;
-            isx[i]=0;
+            ish[i]=1; /* 若猜對, 給其判斷陣列該位置 1 的值 */
+            isx[i]=0; /* 不論如何先填 0 在下一個才要用到的判斷陣列 */
         }
         else
         {
-            ish[i]=0;
+            ish[i]=0; /* 不對的話則給0 */
             isx[i]=0;
         }
     }
@@ -177,6 +179,7 @@ while(1)
             printf("gus[%d]=%d, arr[%d]=%d, ish[%d]=%d, isx[%d]=%d.\n",i, gus[i], j, arr[j], j, ish[j], j, isx[j]);
             sleep(1);
 #endif
+/* 排除掉重複, 已經符合 h 條件的情況 */
             if(gus[i]==arr[j] && ish[i]==0 && isx[i]==0 && ish[j]==0 && isx[j]==0 )
             {
                 x++;
