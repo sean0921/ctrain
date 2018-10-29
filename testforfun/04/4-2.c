@@ -18,7 +18,7 @@ int check_arguments(int argnum, int num)
     }
 }
 
-int check_legal(int array[], int array_number, int max_integer, int* legal_label)
+void check_legal(int array[], int array_number, int max_integer, int* legal_label)
 {
     for(i=0;i<array_number;i++) {
         if(array[i]>0) {
@@ -34,7 +34,7 @@ int check_legal(int array[], int array_number, int max_integer, int* legal_label
     }
 }
 
-int initialize_array_value(int array[], int array_number)
+void initialize_array_value(int array[], int array_number)
 {
     for(i=0;i<array_number;i++) {
         array[i]=0;
@@ -73,7 +73,6 @@ int main(int argc, char *argv[])
 {
     int maxi, nop; 
     int legal=0; //max interger, number of position, if it is legal (1: true, 0: false)
-    int arr[nop];
 
     if( check_arguments(argc,2) != 0) {
         return -1;
@@ -84,6 +83,7 @@ int main(int argc, char *argv[])
 
     printf("You Set N = %d , P = %d \n", maxi, nop);
 
+    int arr[nop];
     while(1) {
         printf("ans: ");
         for(i=0;i<nop;i++) {
