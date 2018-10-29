@@ -21,7 +21,6 @@ int main(int argc, char *argv[]) {
     int i,j;
     unsigned int result_int = 0;
     unsigned long long result_int64 = 0;
-    float result_float;
     int32_t input_int32;
     int64_t input_int64;
     float input_float;
