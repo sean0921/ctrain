@@ -52,17 +52,17 @@ int compare_match_value(int array1[], int array2[], int* is_match, int array_pos
 }
 
 int compare_nomatch_value(int array1[], int array2[], int* is_match,  int* is_same_not_match, int array_position) {
-        for(i=0;i<array_position;i++) {
-            for(j=0;j<array_position;j++) {
-                if(array2[i]==array1[j] && is_match[i]==0 && is_same_not_match[i]==0 && is_match[j]==0 && is_same_not_match[j]==0 ) {
-                    x++;
-                    isx[j]=1;
-                }
+    int same_value_not_match=0;
+    for(i=0;i<array_position;i++) {
+        for(j=0;j<array_position;j++) {
+            if(array2[i]==array1[j] && is_match[i]==0 && is_same_not_match[i]==0 && is_match[j]==0 && is_same_not_match[j]==0 ) {
+                same_value_not_match++;
+                is_same_not_match[j]=1;
             }
         }
+    }
+    return same_value_not_match;
 }
-
-
 
 int main(int argc, char *argv[]) {
     int maxi, nop; 
@@ -128,7 +128,8 @@ int main(int argc, char *argv[]) {
         }
 #endif
 
-//        x = compare_nomatch_value(arr,gus,ish,isx,nop);
+        x = compare_nomatch_value(arr,gus,ish,isx,nop);
+#if 0
         for(i=0;i<nop;i++) {
             for(j=0;j<nop;j++) {
                 if(gus[i]==arr[j] && ish[i]==0 && isx[i]==0 && ish[j]==0 && isx[j]==0 ) {
@@ -137,6 +138,7 @@ int main(int argc, char *argv[]) {
                 }
             }
         }
+#endif
     
         printf("%dH %dX \n",h,x);
         if(h==nop) { 
