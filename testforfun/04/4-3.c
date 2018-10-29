@@ -1,13 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h> // atoi(),
-#include <unistd.h> // sleep(),
 
 #define ANSI_RED    "\x1b[1;31m"
 #define ANSI_RESET  "\x1b[0m"
 
+int i,j;
+
 // usage: int check_argument(<number>)
 // use it to specific
-int check_arguments(int argnum, int num) {
+int check_arguments(int argnum, int num)
+{
     if (argnum != (num+1) ) {
         printf( ANSI_RED "Please input at least %d interger as arguments. :)" ANSI_RESET "\n",num);
         return -1;
@@ -16,46 +18,57 @@ int check_arguments(int argnum, int num) {
     }
 }
 
-int main(int argc, char *argv[]) {
-    int trans_mode; // mode, M=1~6
-    int i,j;
+int check_last_bit(int bitnum)
+{
+    if(bitnum & 1) {
+        printf("1");
+    } else {
+        printf("0");
+    }
+}
+
+int trans_bit_to_int_float(char* argument, int bits)
+{
     unsigned int result_int = 0;
+    float trans_bits_float;
+    /* calculate decimal integer first */
+    for(i=0;i<bits;i++) result_int += (argument[i]-'0') << (bits-i-1);
+    trans_bits_float = *((float*)&result_int);
+    printf("interger: %d\n", result_int);
+    printf("float: %f\n", trans_bits_float);
+}
+
+int trans_int_to_bit(char* argument, int bits)
+{
+    long long int input_int;
+    input_int = atoi(argument);
+    printf("%d-bit: ", bits);
+    for(i=0;i<bits;i++) {
+        j = input_int >> (bits-1-i);
+        check_last_bit(j);
+    }
+    printf("\n");
+}
+
+int main(int argc, char *argv[])
+{
+    int trans_mode; // mode, M=1~6
     unsigned long long result_int64 = 0;
-    int32_t input_int32;
-    int64_t input_int64;
     float input_float;
     double input_double;
     
-    if(check_arguments(argc,2)!=0) {
-        return -1;
-    }
+    if(check_arguments(argc,2)!=0) return -1;
 
     trans_mode = atoi(argv[1]);
 
-    switch( trans_mode ) {
+    switch( trans_mode )
+    {
         case 1:
-            /* calculate decimal integer first */
-            for(i=0;i<32;i++) {
-                result_int += (argv[2][i]-'0') << (31-i);
-            }
-            printf("interger: %d\n", result_int);
-            float trans_bits_float;
-            trans_bits_float = *((float*)&result_int);
-            printf("float: %f\n", trans_bits_float);
+            trans_bit_to_int_float(argv[2],32);
             break;
 
         case 2:
-            input_int32 = atoi(argv[2]);
-            printf("32-bit: ");
-            for(i=0;i<32;i++) {
-                j = input_int32 >> (31-i);
-                if(j & 1) {
-                    printf("1");
-                } else {
-                    printf("0");
-                }
-            }
-            printf("\n");
+            trans_int_to_bit(argv[2],32);
             break;
         case 3:
             input_float = atof(argv[2]);
@@ -64,11 +77,7 @@ int main(int argc, char *argv[]) {
             trans_bits = *((int32_t*)&input_float);
             for(i=0;i<32;i++) {
                 j = trans_bits >> (31-i);
-                if(j & 1) {
-                    printf("1");
-                } else {
-                    printf("0");
-                }
+                check_last_bit(j);
             }
             printf("\n");
             break;
@@ -88,11 +97,7 @@ int main(int argc, char *argv[]) {
             printf("64-bit: ");
             for(i=0;i<64;i++) {
                 j = input_int64 >> (63-i);
-                if(j & 1) {
-                    printf("1");
-                } else {
-                    printf("0");
-                }
+                check_last_bit(j);
             }
             printf("\n");
             break;
@@ -103,11 +108,7 @@ int main(int argc, char *argv[]) {
             trans_bits64 = *((unsigned long long*)&input_double);
             for(i=0;i<64;i++) {
                 j = trans_bits64 >> (63-i);
-                if(j & 1) {
-                    printf("1");
-                } else {
-                    printf("0");
-                }
+                check_last_bit(j);
             }
             printf("\n");
             break;
