@@ -27,15 +27,26 @@ int check_last_bit(int bitnum)
     }
 }
 
-int trans_bit_to_int_float(char* argument, int bits)
+int trans_bit_to_int_float(char* argument)
 {
-    unsigned int result_int = 0;
+    int result_int = 0;
     float trans_bits_float;
     /* calculate decimal integer first */
-    for(i=0;i<bits;i++) result_int += (argument[i]-'0') << (bits-i-1);
+    for(i=0;i<32;i++) result_int += (argument[i]-'0') << (31-i);
     trans_bits_float = *((float*)&result_int);
     printf("interger: %d\n", result_int);
     printf("float: %f\n", trans_bits_float);
+}
+
+int trans_bit_to_int_double(char* argument)
+{
+    unsigned long int result_int = 0;
+    double trans_bits_double;
+    /* calculate decimal integer first */
+    for(i=0;i<64;i++) result_int += (argument[i]-'0') << (63-i);
+    trans_bits_double = *((double*)&result_int);
+    printf("interger: %lu\n", result_int);
+    printf("double: %lf\n", trans_bits_double);
 }
 
 int trans_int_to_bit(char* argument, int bits)
@@ -50,67 +61,60 @@ int trans_int_to_bit(char* argument, int bits)
     printf("\n");
 }
 
+int trans_float_to_bit(char* argument)
+{
+    float input_float;
+    int32_t trans_bits;
+    input_float = atof(argument);
+    printf("32-bit: ");
+    trans_bits = *((int32_t*)&input_float);
+    for(i=0;i<32;i++) {
+        j = trans_bits >> (31-i);
+        check_last_bit(j);
+    }
+    printf("\n");
+}
+
+int trans_double_to_bit(char* argument)
+{
+    double input_double;
+    int64_t trans_bits64;
+    //trans_float_to_bit(argv[2],64);
+    input_double = atof(argument);
+    printf("64-bit: ");
+    trans_bits64 = *((int64_t*)&input_double);
+    for(i=0;i<64;i++) {
+        j = trans_bits64 >> (63-i);
+        check_last_bit(j);
+    }
+    printf("\n");
+}
+
 int main(int argc, char *argv[])
 {
     int trans_mode; // mode, M=1~6
-    unsigned long long result_int64 = 0;
-    float input_float;
-    double input_double;
     
     if(check_arguments(argc,2)!=0) return -1;
-
     trans_mode = atoi(argv[1]);
-
     switch( trans_mode )
     {
         case 1:
-            trans_bit_to_int_float(argv[2],32);
+            trans_bit_to_int_float(argv[2]);
             break;
-
         case 2:
             trans_int_to_bit(argv[2],32);
             break;
         case 3:
-            input_float = atof(argv[2]);
-            printf("32-bit: ");
-            int32_t trans_bits;
-            trans_bits = *((int32_t*)&input_float);
-            for(i=0;i<32;i++) {
-                j = trans_bits >> (31-i);
-                check_last_bit(j);
-            }
-            printf("\n");
+            trans_float_to_bit(argv[2]);
             break;
         case 4:
-            /* calculate decimal integer first */
-            for(i=0;i<64;i++) {
-                result_int64 += (argv[2][i]-'0') << (63-i);
-            }
-            printf("interger: %llu\n", result_int64);
-            double trans_bits_double;
-            trans_bits_double = *((double*)&result_int64);
-            printf("double: %lf\n", trans_bits_double);
+            trans_bit_to_int_double(argv[2]);
             break;
-
         case 5:
-            input_int64 = atoi(argv[2]);
-            printf("64-bit: ");
-            for(i=0;i<64;i++) {
-                j = input_int64 >> (63-i);
-                check_last_bit(j);
-            }
-            printf("\n");
+            trans_int_to_bit(argv[2],64);
             break;
         case 6:
-            input_double = atof(argv[2]);
-            printf("64-bit: ");
-            unsigned long long trans_bits64;
-            trans_bits64 = *((unsigned long long*)&input_double);
-            for(i=0;i<64;i++) {
-                j = trans_bits64 >> (63-i);
-                check_last_bit(j);
-            }
-            printf("\n");
+            trans_double_to_bit(argv[2]);
             break;
     }
 
