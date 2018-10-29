@@ -19,14 +19,6 @@ int check_arguments(int argnum, int num) {
 int main(int argc, char *argv[]) {
     int trans_mode; // mode, M=1~6
     int i,j;
-    int thtw[32];
-    unsigned long long sxfr[64];
-    int sign;
-    int exponent_orig = -127;
-    float exponent = 1;
-    int mantisa_orig[23];
-    float mantisa_orig_float[23];
-    float mantisa_float;
     unsigned int result_int = 0;
     unsigned long long result_int64 = 0;
     float result_float;
@@ -34,8 +26,6 @@ int main(int argc, char *argv[]) {
     int64_t input_int64;
     float input_float;
     double input_double;
-    int result_thtw[32];
-    int result_sxfr[64];
     
     if(check_arguments(argc,2)!=0) {
         return -1;
@@ -47,8 +37,7 @@ int main(int argc, char *argv[]) {
         case 1:
             /* calculate decimal integer first */
             for(i=0;i<32;i++) {
-                thtw[i]=argv[2][i]-'0';
-                result_int += thtw[i] << (31-i);
+                result_int += (argv[2][i]-'0') << (31-i);
             }
             printf("interger: %d\n", result_int);
             float trans_bits_float;
@@ -87,8 +76,7 @@ int main(int argc, char *argv[]) {
         case 4:
             /* calculate decimal integer first */
             for(i=0;i<64;i++) {
-                sxfr[i]=argv[2][i]-'0';
-                result_int64 += sxfr[i] << (63-i);
+                result_int64 += (argv[2][i]-'0') << (63-i);
             }
             printf("interger: %llu\n", result_int64);
             double trans_bits_double;
