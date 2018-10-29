@@ -1,3 +1,10 @@
+/*******************************************************************************
+* encoding: UTF-8
+* 編譯方式：gcc -o hw4_2 hw4_2.c
+* 執行方式：./hw4_2
+* 程式功能：猜數字遊戲
+********************************************************************************/
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -7,7 +14,8 @@
 int i,j;
 
 // usage: int check_argument(<number>)
-// use it to specific
+// use it to specific argument number is correct
+/* 若使用者在程式後加的參數並非四個，則程式終止 */
 int check_arguments(int argnum, int num)
 {
     if (argnum != (num+1) ) {
