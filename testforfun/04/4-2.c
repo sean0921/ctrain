@@ -4,7 +4,7 @@
 #define ANSI_RED    "\x1b[1;31m"
 #define ANSI_RESET  "\x1b[0m"
 
-int i;
+int i,j;
 
 // usage: int check_argument(<number>)
 // use it to specific
@@ -32,23 +32,39 @@ int check_legal(int array[], int array_number, int max_integer, int* legal_label
     }
 }
 
-#if 0
-int compare_match(int* array1[], int* array2[], int* ish[], int* isx[], int array_position) {
+int initialize_array_value(int array[], int array_number) {
+    for(i=0;i<array_number;i++) {
+        array[i]=0;
+    }
+}
+
+int compare_match_value(int array1[], int array2[], int* is_match, int array_position) {
+    int match=0;
+    for(i=0;i<array_position;i++) {
+        if(array1[i]==array2[i]) {
+            match++;
+            is_match[i]=1;
+        } else {
+            is_match[i]=0;
+        }
+    }
+    return match;
+}
+
+int compare_nomatch_value(int array1[], int array2[], int* is_match,  int* is_same_not_match, int array_position) {
         for(i=0;i<array_position;i++) {
-            if(array1[i]==array2[i]) {
-                h++;
-                ish[i]=1;
-                isx[i]=0;
-            } else {
-                ish[i]=0;
-                isx[i]=0;
+            for(j=0;j<array_position;j++) {
+                if(array2[i]==array1[j] && is_match[i]==0 && is_same_not_match[i]==0 && is_match[j]==0 && is_same_not_match[j]==0 ) {
+                    x++;
+                    isx[j]=1;
+                }
             }
         }
-#endif
+}
 
-int main(int argc, char *argv[])
-{
 
+
+int main(int argc, char *argv[]) {
     int maxi, nop; 
     int legal=0; //max interger, number of position, if it is legal (1: true, 0: false)
     int arr[nop];
@@ -62,8 +78,7 @@ int main(int argc, char *argv[])
 
     printf("You Set N = %d , P = %d \n", maxi, nop);
 
-    while(1)
-    {
+    while(1) {
         printf("ans: ");
         for(i=0;i<nop;i++) {
             scanf("%d",&arr[i]);
@@ -81,8 +96,7 @@ int main(int argc, char *argv[])
     int gus[nop];
     legal=0; //reset legal value for prepare checking next array
     
-    while(1)
-    {
+    while(1) {
         printf("guess: ");
         for(i=0;i<nop;i++) {
             scanf("%d",&gus[i]);
@@ -98,22 +112,23 @@ int main(int argc, char *argv[])
         int h=0, x=0;
         int ish[nop], isx[nop];
         int j;
-    
-//        compare_match(int array1[], int array2[], int array_position) {
 
-//        h = compare_match_value(arr,gus,&ish,&isx,nop);
+        initialize_array_value(ish,nop);
+        initialize_array_value(isx,nop);
+    
+        h = compare_match_value(arr,gus,ish,nop);
+#if 0
         for(i=0;i<nop;i++) {
             if(gus[i]==arr[i]) {
                 h++;
                 ish[i]=1;
-                isx[i]=0;
             } else {
                 ish[i]=0;
-                isx[i]=0;
             }
         }
+#endif
 
-//        x = compare_nomatch_value(arr,gus,&ish,&isx,nop);
+//        x = compare_nomatch_value(arr,gus,ish,isx,nop);
         for(i=0;i<nop;i++) {
             for(j=0;j<nop;j++) {
                 if(gus[i]==arr[j] && ish[i]==0 && isx[i]==0 && ish[j]==0 && isx[j]==0 ) {
