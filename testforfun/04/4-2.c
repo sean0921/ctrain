@@ -108,7 +108,7 @@ int main(int argc, char *argv[]) {
             printf("The answer is illegal, please reset the answer.\n");
             continue;
         }
-    
+
         int h=0, x=0;
         int ish[nop], isx[nop];
         int j;
@@ -117,29 +117,8 @@ int main(int argc, char *argv[]) {
         initialize_array_value(isx,nop);
     
         h = compare_match_value(arr,gus,ish,nop);
-#if 0
-        for(i=0;i<nop;i++) {
-            if(gus[i]==arr[i]) {
-                h++;
-                ish[i]=1;
-            } else {
-                ish[i]=0;
-            }
-        }
-#endif
-
         x = compare_nomatch_value(arr,gus,ish,isx,nop);
-#if 0
-        for(i=0;i<nop;i++) {
-            for(j=0;j<nop;j++) {
-                if(gus[i]==arr[j] && ish[i]==0 && isx[i]==0 && ish[j]==0 && isx[j]==0 ) {
-                    x++;
-                    isx[j]=1;
-                }
-            }
-        }
-#endif
-    
+
         printf("%dH %dX \n",h,x);
         if(h==nop) { 
             break;
