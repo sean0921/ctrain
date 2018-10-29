@@ -8,7 +8,8 @@ int i,j;
 
 // usage: int check_argument(<number>)
 // use it to specific
-int check_arguments(int argnum, int num) {
+int check_arguments(int argnum, int num)
+{
     if (argnum != (num+1) ) {
         printf( ANSI_RED "Please input at least %d interger as arguments. :)" ANSI_RESET "\n",num);
         return -1;
@@ -17,7 +18,8 @@ int check_arguments(int argnum, int num) {
     }
 }
 
-int check_legal(int array[], int array_number, int max_integer, int* legal_label) {
+int check_legal(int array[], int array_number, int max_integer, int* legal_label)
+{
     for(i=0;i<array_number;i++) {
         if(array[i]>0) {
             if(array[i] <= max_integer) *legal_label=1;
@@ -32,13 +34,15 @@ int check_legal(int array[], int array_number, int max_integer, int* legal_label
     }
 }
 
-int initialize_array_value(int array[], int array_number) {
+int initialize_array_value(int array[], int array_number)
+{
     for(i=0;i<array_number;i++) {
         array[i]=0;
     }
 }
 
-int compare_match_value(int array1[], int array2[], int* is_match, int array_position) {
+int compare_match_value(int array1[], int array2[], int* is_match, int array_position)
+{
     int match=0;
     for(i=0;i<array_position;i++) {
         if(array1[i]==array2[i]) {
@@ -51,7 +55,8 @@ int compare_match_value(int array1[], int array2[], int* is_match, int array_pos
     return match;
 }
 
-int compare_nomatch_value(int array1[], int array2[], int* is_match,  int* is_same_not_match, int array_position) {
+int compare_nomatch_value(int array1[], int array2[], int* is_match,  int* is_same_not_match, int array_position)
+{
     int same_value_not_match=0;
     for(i=0;i<array_position;i++) {
         for(j=0;j<array_position;j++) {
@@ -64,7 +69,8 @@ int compare_nomatch_value(int array1[], int array2[], int* is_match,  int* is_sa
     return same_value_not_match;
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[])
+{
     int maxi, nop; 
     int legal=0; //max interger, number of position, if it is legal (1: true, 0: false)
     int arr[nop];
