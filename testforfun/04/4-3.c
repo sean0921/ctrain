@@ -18,7 +18,7 @@ int check_arguments(int argnum, int num)
     }
 }
 
-int check_last_bit(int bitnum)
+void check_last_bit(int bitnum)
 {
     if(bitnum & 1) {
         printf("1");
@@ -27,7 +27,16 @@ int check_last_bit(int bitnum)
     }
 }
 
-int trans_bit_to_int_float(char* argument)
+
+void trans_bits_work(int a, int bitnum)
+{
+    for(i=0;i<bitnum;i++) {
+        j = a >> (bitnum-1-i);
+        check_last_bit(j);
+    }
+}
+
+void trans_bit_to_int_float(char* argument)
 {
     int result_int = 0;
     float trans_bits_float;
@@ -38,7 +47,7 @@ int trans_bit_to_int_float(char* argument)
     printf("float: %f\n", trans_bits_float);
 }
 
-int trans_bit_to_int_double(char* argument)
+void trans_bit_to_int_double(char* argument)
 {
     unsigned long int result_int = 0;
     double trans_bits_double;
@@ -49,44 +58,34 @@ int trans_bit_to_int_double(char* argument)
     printf("double: %lf\n", trans_bits_double);
 }
 
-int trans_int_to_bit(char* argument, int bits)
+void trans_int_to_bit(char* argument, int bits)
 {
     long long int input_int;
     input_int = atoi(argument);
     printf("%d-bit: ", bits);
-    for(i=0;i<bits;i++) {
-        j = input_int >> (bits-1-i);
-        check_last_bit(j);
-    }
+    trans_bits_work(input_int,bits);
     printf("\n");
 }
 
-int trans_float_to_bit(char* argument)
+void trans_float_to_bit(char* argument)
 {
     float input_float;
     int32_t trans_bits;
     input_float = atof(argument);
     printf("32-bit: ");
     trans_bits = *((int32_t*)&input_float);
-    for(i=0;i<32;i++) {
-        j = trans_bits >> (31-i);
-        check_last_bit(j);
-    }
+    trans_bits_work(trans_bits,32);
     printf("\n");
 }
 
-int trans_double_to_bit(char* argument)
+void trans_double_to_bit(char* argument)
 {
     double input_double;
     int64_t trans_bits64;
-    //trans_float_to_bit(argv[2],64);
     input_double = atof(argument);
     printf("64-bit: ");
     trans_bits64 = *((int64_t*)&input_double);
-    for(i=0;i<64;i++) {
-        j = trans_bits64 >> (63-i);
-        check_last_bit(j);
-    }
+    trans_bits_work(trans_bits64,64);
     printf("\n");
 }
 
@@ -117,7 +116,5 @@ int main(int argc, char *argv[])
             trans_double_to_bit(argv[2]);
             break;
     }
-
     return 0;
 }
-
