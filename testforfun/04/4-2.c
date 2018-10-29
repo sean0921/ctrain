@@ -26,6 +26,8 @@ int check_arguments(int argnum, int num)
     }
 }
 
+// usage: int check_legal(<array name>,<array number>,<maximun integer in array>,<if it is legal>)
+// use it to check numbers in specific array is legal number 
 void check_legal(int array[], int array_number, int max_integer, int* legal_label)
 {
     for(i=0;i<array_number;i++) {
@@ -42,6 +44,8 @@ void check_legal(int array[], int array_number, int max_integer, int* legal_labe
     }
 }
 
+// usage: initialize_array_value(<array name>,<array number>)
+// input array with all zero value, when this array length are not fixed
 void initialize_array_value(int array[], int array_number)
 {
     for(i=0;i<array_number;i++) {
@@ -49,6 +53,8 @@ void initialize_array_value(int array[], int array_number)
     }
 }
 
+// usage: compare_match_value(<answer array>,<guess array>,<array to record match place>,<array positions>
+// comparing guess array and answer array and analyze
 int compare_match_value(int array1[], int array2[], int* is_match, int array_position)
 {
     int match=0;
@@ -63,6 +69,9 @@ int compare_match_value(int array1[], int array2[], int* is_match, int array_pos
     return match;
 }
 
+// usage: compare_match_value(<answer array>,<guess array>,
+//                            <array to record match place>,<array to record only match value>,<positions>)
+// comparing guess array and answer array and analyze
 int compare_nomatch_value(int array1[], int array2[], int* is_match,  int* is_same_not_match, int array_position)
 {
     int same_value_not_match=0;
