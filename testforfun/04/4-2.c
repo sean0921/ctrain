@@ -13,7 +13,7 @@
 
 int i,j;
 
-// usage: int check_argument(<number>)
+// usage: check_argument(<number>)
 // use it to specific argument number is correct
 /* 若使用者在程式後加的參數並非四個，則程式終止 */
 int check_arguments(int argnum, int num)
@@ -26,7 +26,7 @@ int check_arguments(int argnum, int num)
     }
 }
 
-// usage: int check_legal(<array name>,<array number>,<maximun integer in array>,<if it is legal>)
+// usage: check_legal(<array name>,<array number>,<maximun integer in array>,<if it is legal>)
 // use it to check numbers in specific array is legal number 
 void check_legal(int array[], int array_number, int max_integer, int* legal_label)
 {

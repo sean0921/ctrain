@@ -13,7 +13,7 @@
 
 int i,j;
 
-// usage: int check_argument(<number>)
+// usage: check_argument(<number>)
 // use it to specific argument number is correct
 /* 若使用者在程式後加的參數並非四個，則程式終止 */
 int check_arguments(int argnum, int num)
@@ -26,7 +26,7 @@ int check_arguments(int argnum, int num)
     }
 }
 
-// usage: int check_last_bit(<32/64>)
+// usage: check_last_bit(<32/64>)
 // use it to check last bit of binary number is correct
 void check_last_bit(int bitnum)
 {
@@ -37,7 +37,7 @@ void check_last_bit(int bitnum)
     }
 }
 
-// usage: int trans_bits_work(<variable>)
+// usage: trans_bits_work(<variable>)
 // use it to trans input variable to bit pattern
 void trans_bits_work(long long int a, int bitnum)
 {
@@ -47,7 +47,7 @@ void trans_bits_work(long long int a, int bitnum)
     }
 }
 
-// usage: int trans_bit_to_int_float(<argument(argv[number])>)
+// usage: trans_bit_to_int_float(<argument(argv[number])>)
 // use it to trans bit pattern to integer or float variable
 void trans_bit_to_int_float(char* argument)
 {
@@ -60,7 +60,7 @@ void trans_bit_to_int_float(char* argument)
     printf("float: %f\n", trans_bits_float);
 }
 
-// usage: int trans_bit_to_int_float(<argument(argv[number])>)
+// usage: trans_bit_to_int_double(<argument(argv[number])>)
 // use it to trans bit pattern to integer or double variable
 void trans_bit_to_int_double(char* argument)
 {
@@ -73,7 +73,7 @@ void trans_bit_to_int_double(char* argument)
     printf("double: %lf\n", trans_bits_double);
 }
 
-// usage: int trans_bit_to_int_float(<argument(argv[number])>)
+// usage: trans_bit_to_int_float(<argument(argv[number])>)
 // use it to check last bit of binary number is correct
 void trans_int_to_bit(char* argument, int bits)
 {
