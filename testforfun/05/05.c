@@ -6,15 +6,13 @@
 #define MAX_NUMBER (100)
 
 int check_arguments(int argnum, int num);
-int bucket_union(unsigned int bucket_item, unsigned int bucker_size, unsigned int max_number, unsigned int array[][MAX_NUMBER]);
+int bucket_union(unsigned int bucket_item, unsigned int bucker_size, unsigned int max_number, unsigned int seed, unsigned int array[][MAX_NUMBER]);
 
 int main(int argc, char* argv[])
 {
     if(check_arguments(argc,4)!=0) return -1;
 
     unsigned int n, m, d, s;
-    int generate_number_of_elements_in_a_bucket;
-    int generate_a_random_num;
     unsigned int array1[MAX_NUMBER][MAX_NUMBER];
 
     n = atoi(argv[1]);
@@ -22,14 +20,8 @@ int main(int argc, char* argv[])
     d = atoi(argv[3]);
     s = atoi(argv[4]);
 
-    printf("n=%d, m=%d, d=%d, s=%d \n", n, m, d, s);
-    srand(s);
-    generate_number_of_elements_in_a_bucket = (rand()%m) + 1;
-    printf("generate_number_of_elements_in_a_bucket: %d \n", generate_number_of_elements_in_a_bucket);
-    generate_a_random_num = (rand()%d);
-    printf("generate_a_random_num: %d \n", generate_a_random_num);
-
-    bucket_union(n,m,d,array1);
+    printf("n=%d, m=%d, d=%d, s=%d \n\n", n, m, d, s);
+    bucket_union(n,m,d,s,array1);
 
     return 0;
 }
@@ -48,16 +40,23 @@ int check_arguments(int argnum, int num)
 }
 
 
-int bucket_union(unsigned int bucket_item, unsigned int bucker_size, unsigned int max_number, unsigned int array[][MAX_NUMBER])
+int bucket_union(unsigned int bucket_item, unsigned int bucker_size, unsigned int max_number, unsigned int seed, unsigned int array[][MAX_NUMBER])
 {
     int i,j;
+    int generate_number_of_elements_in_a_bucket;
+    int generate_a_random_num;
+
+    srand(seed);
 
     for(i=0;i<bucket_item;i++) {
-        for(j=0;j<bucker_size;j++) {
-            array[i][j]=(rand()%max_number) + 1;
+        generate_number_of_elements_in_a_bucket = (rand()%bucker_size) + 1;
+        //printf("generate_number_of_elements_in_a_bucket: %d \n", generate_number_of_elements_in_a_bucket);
+        for(j=0;j<generate_number_of_elements_in_a_bucket;j++) {
+            generate_a_random_num = (rand()%max_number);
+            //printf("generate_a_random_num: %d \n", generate_a_random_num);
+            array[i][j] = generate_a_random_num;
             printf("%d ",array[i][j]);
         }
         printf("\n");
     }
-    printf("\n");
 }
