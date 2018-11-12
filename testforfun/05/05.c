@@ -3,16 +3,19 @@
 
 #define ANSI_RED    "\x1b[1;31m"
 #define ANSI_RESET  "\x1b[0m"
+#define MAX_NUMBER (100)
 
 int check_arguments(int argnum, int num);
+int bucket_union(unsigned int bucket_item, unsigned int bucker_size, unsigned int max_number, unsigned int array[][MAX_NUMBER]);
 
 int main(int argc, char* argv[])
 {
     if(check_arguments(argc,4)!=0) return -1;
 
-    int n, m, d, s;
+    unsigned int n, m, d, s;
     int generate_number_of_elements_in_a_bucket;
     int generate_a_random_num;
+    unsigned int array1[MAX_NUMBER][MAX_NUMBER];
 
     n = atoi(argv[1]);
     m = atoi(argv[2]);
@@ -22,10 +25,12 @@ int main(int argc, char* argv[])
     printf("n=%d, m=%d, d=%d, s=%d \n", n, m, d, s);
     srand(s);
     generate_number_of_elements_in_a_bucket = (rand()%m) + 1;
-    printf("generate_number_of_elements_in_a_bucket: %d \n", \
-    generate_number_of_elements_in_a_bucket);
+    printf("generate_number_of_elements_in_a_bucket: %d \n", generate_number_of_elements_in_a_bucket);
     generate_a_random_num = (rand()%d);
     printf("generate_a_random_num: %d \n", generate_a_random_num);
+
+    bucket_union(n,m,d,array1);
+
     return 0;
 }
 
@@ -40,4 +45,19 @@ int check_arguments(int argnum, int num)
     } else {
         return 0;
     }
+}
+
+
+int bucket_union(unsigned int bucket_item, unsigned int bucker_size, unsigned int max_number, unsigned int array[][MAX_NUMBER])
+{
+    int i,j;
+
+    for(i=0;i<bucket_item;i++) {
+        for(j=0;j<bucker_size;j++) {
+            array[i][j]=(rand()%max_number) + 1;
+            printf("%d ",array[i][j]);
+        }
+        printf("\n");
+    }
+    printf("\n");
 }
