@@ -1,0 +1,68 @@
+#!/usr/bin/env bash
+
+test -z "$CC" && CC=gcc
+
+SRC=(
+    01-basic
+    02-novalue
+    03-sizeof
+    04-arrayio
+    05-compare
+    05-2-iocompare
+    06-inputseveral
+)
+
+CFLAGS=(
+    -ggdb
+)
+
+test "$STATIC" = 1 && CFLAGS+=('-static')
+
+function compile_one() {
+    set -eux
+    "$CC" -o "$(dirname "$0")"/"$1" "${CFLAGS[@]}" "$(dirname "$0")"/"$1".c
+    exit 0
+}
+
+function clean_object() {
+    set -eux
+    cd "$(dirname "$0")" && rm -f "${SRC[@]}" ./*.o ./*.exe
+    exit 0
+}
+
+function help_message() {
+    printf "
+./compile: Simple Compile Bash Script
+
+help: show this message
+all: compile all programs
+clean: clean binary files
+<program_name>: compile <program_name>.c
+
+Note.
+1. You can specific custom compiler with CC variable
+2. You can compile static linked program by set variable STATIC=1
+
+"
+    exit 0
+}
+
+function compile_all() {
+    set -eux
+    for i in "${SRC[@]}"
+    do
+        "$CC" -o "$(dirname "$0")"/"$i" "${CFLAGS[@]}" "$(dirname "$0")"/"$i".c
+    done
+    exit 0
+}
+
+test "$0" = "$(dirname "$0")/clean" && clean_object
+test -z "$1"          && help_message
+test "$1" = "all"     && compile_all
+test "$1" = "clean"   && clean_object
+test "$1" = "help"    && help_message
+for i in "${SRC[@]}"
+do
+    test "$1" = "$i" && compile_one "$1"
+done
+help_message
